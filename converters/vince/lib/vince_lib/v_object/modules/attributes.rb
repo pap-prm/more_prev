@@ -57,4 +57,3 @@ module VObject
     end #module
   end #module
 end #module
-end
