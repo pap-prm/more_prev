@@ -1,0 +1,5 @@
+unless Gem::Specification.all_names.any?{|gem| gem =~ /rubyzip/}
+  gem 'rubyzip'
+end
+
+gem 'zlib'
