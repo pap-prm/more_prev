@@ -62,7 +62,7 @@ module VObject
           if args.first.is_a?(Array)
             args.first.each do |arg|
               if arg.is_a?(Array)
-                send(arg.first.to_s.downcase.to_sym, *(arg.from(1))) if self.class::FIELDS.include?(arg.first.to_s.downcase.to_sym)
+                send(arg.first.to_s.downcase.to_sym, *arg[1..-1]) if self.class::FIELDS.include?(arg.first.to_s.downcase.to_sym)
                 send(:x, *arg)                                       if                 arg.first.to_s.downcase =~ /\Ax-/
               end
             end

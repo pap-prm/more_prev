@@ -81,7 +81,7 @@ module VObject
         end
       else
         args.each do |arg|
-          try(arg.first.to_s.downcase.to_sym, *(arg.from(1))) if arg.is_a?(Array)
+          try(arg.first.to_s.downcase.to_sym, *arg[1..-1]) if arg.is_a?(Array)
         end
         options.each do |key, val|
           try(key.to_s.downcase.to_sym, *val)
@@ -124,7 +124,8 @@ module VObject
     def webalize(fields: nil, iconize: false)
       
       (fields || object.class::FIELDS).map do |field|
-        object.try(field).try(:webalize, iconize: iconize)
+        obj_field = object.send(field) if object.respond_to?(field)
+        obj_field&.webalize(iconize: iconize)
       end.
       flatten.select(&:present?).
       join("\n").encode("UTF-8", universal_newline: true)

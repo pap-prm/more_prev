@@ -20,6 +20,7 @@
 #
 # 1.0.0
 #       - initial version
+require 'marcel'
 
 class Maggie < RedmineMorePreviews::Conversion
 
