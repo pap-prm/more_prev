@@ -39,8 +39,9 @@ module RedmineMorePreviews
           pdf.RDMMultiCell(190, 5, buf)
           
           pdf.SetFontStyle('',8)
+          obj = locals.dig(:@object,'object')
           buf  = "You were trying to preview the following object: "
-          buf += "#{locals.dig(:@object,'object').try(:class).try(:name)} - #{locals.dig(:@object,'object').try(:id)}"
+          buf += "#{obj&.class&.name} - #{obj&.id}" if obj
           pdf.RDMMultiCell(190, 5, buf)
           
           buf  = "The following parameters were available for conversion of the object:"

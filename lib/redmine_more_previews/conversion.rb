@@ -91,16 +91,16 @@ module RedmineMorePreviews
       raise ConverterWrongArgument unless mime_types.is_a?(Hash)
       
       self.object         = (options[:object].presence || {}).stringify_keys
-      self.project        = object['object'].try(:project)
+      self.project        = object['object']&.project
       
       self.unique_id      = case object['type']
       when :attachment
         object['object'].id
       when :repository
-        entry = object['object'].try(:entry, object['path'], object['rev'])
-        entry.try(:info)
+        entry = object['object']&.entry(object['path'], object['rev'])
+        entry&.info
       else
-        object['object'].try(:object_id)
+        object['object']&.object_id
       end
       
       self.format         = options[:format].to_s.downcase

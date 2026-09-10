@@ -124,7 +124,8 @@ module VObject
     def webalize(fields: nil, iconize: false)
       
       (fields || object.class::FIELDS).map do |field|
-        object.try(field).try(:webalize, iconize: iconize)
+        obj_field = object.send(field) if object.respond_to?(field)
+        obj_field&.webalize(iconize: iconize)
       end.
       flatten.select(&:present?).
       join("\n").encode("UTF-8", universal_newline: true)
