@@ -81,7 +81,7 @@ module VObject
         end
       else
         args.each do |arg|
-          try(arg.first.to_s.downcase.to_sym, *(arg.from(1))) if arg.is_a?(Array)
+          try(arg.first.to_s.downcase.to_sym, *arg[1..-1]) if arg.is_a?(Array)
         end
         options.each do |key, val|
           try(key.to_s.downcase.to_sym, *val)

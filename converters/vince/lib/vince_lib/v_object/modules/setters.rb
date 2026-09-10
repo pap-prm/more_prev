@@ -51,7 +51,8 @@ module VObject
       # operator to work reliably, therefore we make sure all keys are symbolized
       #
       def symbolize_attributes(*args)
-        argd = args.dup; atts = argd.extract_options!
+        argd = args.dup
+        atts = argd.last.is_a?(Hash) ? argd.pop : {}
         atts = atts.map{|k,v| [k.to_sym,attributize(v)]}.to_h
         argd << atts
       end #def
